@@ -1,0 +1,24 @@
+{
+  "name": "teste-frontend-escale",
+  "version": "1.0.0",
+  "description": "Teste frontend utilizando api do Github",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/froliveira94/teste-frontend-escale.git"
+  },
+  "author": "Felipe Rodrigues de Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/froliveira94/teste-frontend-escale/issues"
+  },
+  "homepage": "https://github.com/froliveira94/teste-frontend-escale#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}
