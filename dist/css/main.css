@@ -3,3 +3,6 @@
 
 .user-info .user-info_img img {
   border-radius: 50%; }
+
+.user-info .user-info_data li {
+  overflow: hidden; }
