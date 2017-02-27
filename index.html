@@ -11,7 +11,7 @@
     <!--Styles -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-    <link rel="stylesheet" href="./dist/css/vendor/materialize.min.css">
+    <link rel="stylesheet" href="./dist/css/vendor/materialize.min.css"> 
     <link rel="stylesheet" href="dist/css/main.css">
 </head>
 <body>
@@ -47,14 +47,25 @@
        </div>
        <div class="row">
         <div class="col s12 m6">
-            Ordenar por: 
+            Ordem: 
             <div class="input-field inline">
-                <select class="browser-default" id="selectFilter">
-                <option value="" disabled selected>Selecione</option>
-                    <option value="1">Ordem alfabética</option>
-                    <option value="2">Quantidade de estrelas</option>
-                    <option value="3">Quantidade de problemas</option>
-                </select>
+              <select id="selectOrder">
+                <option value="1" disabled selected>Selecione</option>
+                <option value="1">Ordem alfabética</option>
+                <option value="2">Quantidade de estrelas</option>
+                <option value="3">Quantidade de problemas</option>
+              </select>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            Linguagem: 
+            <div class="input-field inline">
+              <select multiple id="selectFilterLanguage">
+                <option value="TODAS" disabled selected>Todas</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+              </select>
             </div>
         </div>
        </div>
