@@ -23,10 +23,20 @@ var App = {
      
 
      var dataUserRepo =  $.getJSON( url, function() {})
-        .done(function(data){        
+        .done(function(data){
+
+            for(var i in data) {
+                if(data[i].language === null) {
+                    data[i].language = 'Linguagem não cadastrada';
+                }
+                if(data[i].description === null) {
+                    data[i].description = 'Descrição não cadastrada';
+                }
+            }
+
             switch (valueSelect) {
             case "1":
-               dataAlphabeticalOrder = data.sort(function(a, b) {
+                dataAlphabeticalOrder = data.sort(function(a, b) {
                     var textA = a.name.toUpperCase();
                     var textB = b.name.toUpperCase();
                     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -110,6 +120,7 @@ var App = {
 $(document).ready(function(){
     var valueSelect;
     var obj = {};
+    //var bkp;
 
      App.parallax();
      $('select').material_select();
@@ -130,7 +141,7 @@ $(document).ready(function(){
         });
 
         App.renderUserRepo('wilfernandesjr/starred', valueSelect, obj);
-
+        //bkp = obj;
         obj = {}
      });
 
