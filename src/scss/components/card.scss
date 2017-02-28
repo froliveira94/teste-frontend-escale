@@ -15,6 +15,13 @@
         .card-title {
             @include text-overflow(1, 24px, 1.2);
             margin-bottom: 25px;
+
+            @media only screen 
+            and (min-device-width: 320px) 
+            and (max-device-width: 667px) 
+            and (-webkit-min-device-pixel-ratio: 2) { 
+                margin-top: -3px;
+            }
         }
         .card_description {
             @include text-overflow(2, 15px, 1.2);
