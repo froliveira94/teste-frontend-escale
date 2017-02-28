@@ -8,7 +8,7 @@ var App = {
         }).done(function (data) {
             $('#avatarUser').html("<img src='" + data.avatar_url + "'class='responsive-img'>");
             $('#userInfoName').html(data.name);
-            $('#userInfoData').html("<li>" + "<i class='material-icons left'>perm_identity</i><span class='left'>" + data.login + "</span></li>" + "<li>" + "<i class='material-icons left'>work</i><span class='left'>" + data.company + "</span></li>" + "<li>" + "<i class='material-icons left'>email</i><span class='left'>" + data.email + "</span></li>");
+            $('#userInfoData').html("<li>" + "<i class='fa fa-user-o pull-left' aria-hidden='true'></i><span class='left'>" + data.login + "</span></li>" + "<li>" + "<i class='fa fa-suitcase pull-left' aria-hidden='true'></i><span class='left'>" + data.company + "</span></li>" + "<li>" + "<i class='fa fa-envelope pull-left' aria-hidden='true'></i><span class='left'>" + data.email + "</span></li>");
         }).fail(function () {
             console.log('Ocorreu algum erro na API!');
         })
@@ -104,7 +104,7 @@ var App = {
 
         App.clearContainer('#userRepos');
         $.each(elementsFiltered, function (i, value) {
-            $('#userRepos').append("<div class='col s12 m6'><div class='card blue-grey darken-1'><div class='card-content white-text'><span class='card-title'>" + elementsFiltered[i].name + "</span><p class='card_description'>" + elementsFiltered[i].description + "</p><p class='card_language'>" + elementsFiltered[i].language + "</p><div class='row'><div class='col m6 s6'>" + elementsFiltered[i].stargazers_count + "</div><div class='col m6 s6'>" + elementsFiltered[i].open_issues_count + "</div><div class='col m6 s6'>" + elementsFiltered[i].created_at + "</div><div class='col m6 s6'>" + elementsFiltered[i].pushed_at + "</div></div></div><div class='card-action'><a href='" + elementsFiltered[i].html_url + "' target='_blank'>Ver mais</a></div></div></div>");
+            $('#userRepos').append("<div class='col s12 m6'><div class='card blue-grey darken-1'><div class='card-content white-text'><i class='fa fa-github pull-left fa-2x' aria-hidden='true'></i><span class='card-title'>" + elementsFiltered[i].name + "</span><p class='card_description'>" + elementsFiltered[i].description + "</p><div class='row'><div class='col s12'><i class='fa fa-code pull-left icon-language' aria-hidden='true'></i><span class='card_language'>"+ elementsFiltered[i].language + "</span></div></div><div class='row'><div class='col m6 s6'><i class='fa fa-star pull-left' aria-hidden='true'></i><span class='card_text_icon'>" + elementsFiltered[i].stargazers_count + "</span></div><div class='col m6 s6'><i class='fa fa-warning pull-left' aria-hidden='true'></i><span class='card_text_icon'>" + elementsFiltered[i].open_issues_count + "</span></div></div><div class='row'><div class='col m6 s6'><span class='card_at'>Criado em:</span><br/>" + elementsFiltered[i].created_at + "</div><div class='col m6 s6'><span class='card_at'>Último push:</span><br/>" + elementsFiltered[i].pushed_at + "</div></div></div><div class='card-action'><a href='" + elementsFiltered[i].html_url + "' target='_blank'>Ver mais</a></div></div></div>");
         });
 
     },

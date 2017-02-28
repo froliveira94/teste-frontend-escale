@@ -12,11 +12,21 @@
   <!--Styles -->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="./dist/css/vendor/font-awesome.min.css">
   <link rel="stylesheet" href="./dist/css/vendor/materialize.min.css">
   <link rel="stylesheet" href="dist/css/main.css">
 </head>
 
 <body>
+  <header>
+    <nav>
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="index.html" class="brand-logo">Teste Frontend Escale</a>
+        </div>
+      </div>
+    </nav>
+  </header>
   <div class="parallax-container">
     <div class="parallax"><img src="img/header.jpg"></div>
   </div>
@@ -48,24 +58,31 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field inline col s12 m6">
-          <select id="selectOrder">
+        <div class="col s12">
+          <p class="caption">Ordene os meus repositórios e depois fique a vontade para filtra-los como quiser.</p>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="row">
+          <div class="input-field inline col s12 m6">
+            <select id="selectOrder">
                   <option value="1" disabled selected>Selecione</option>
                   <option value="1">Ordem alfabética</option>
                   <option value="2">Quantidade de estrelas</option>
                   <option value="3">Quantidade de problemas</option>
                 </select>
-          <label>Ordem</label>
-        </div>
+            <label>Ordem</label>
+          </div>
 
-        <div class="input-field inline  col s12 m6">
-          <select multiple id="selectFilterLanguage">
+          <div class="input-field inline  col s12 m6">
+            <select multiple id="selectFilterLanguage">
                 <option value="TODAS" disabled selected>Selecione</option>
                 <option value="HTML">HTML</option>
                 <option value="CSS">CSS</option>
                 <option value="JavaScript">JavaScript</option>
               </select>
-          <label>Linguagem</label>
+            <label>Linguagem</label>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -80,7 +97,7 @@
 
 <!-- Scripts -->
 <script src="./dist/js/vendor/moment.js"></script>
-<script src="./dist/js/vendor/locale/pt-br.js"></script>
+<script src="./dist/js/vendor/pt-br.js"></script>
 <script src="./dist/js/vendor/moment-with-locales.js"></script>
 <script src="./dist/js/vendor/jquery-2.1.1.min.js"></script>
 <script src="./dist/js/vendor/materialize.min.js"></script>
