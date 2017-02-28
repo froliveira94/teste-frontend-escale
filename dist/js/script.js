@@ -46,13 +46,13 @@ var App = {
                         break;
                     case "2":
                         var dataStarCount = data.sort(function (a, b) {
-                            return a.stargazers_count - b.stargazers_count;
+                            return a.stargazers_count < b.stargazers_count;
                         });
                         App.renderFilter(data, objectFilter, dataStarCount);
                         break;
                     case "3":
                         var dataIssuesCount = data.sort(function (a, b) {
-                            return a.open_issues_count - b.open_issues_count;
+                            return a.open_issues_count < b.open_issues_count;
                         });
                         App.renderFilter(data, objectFilter, dataIssuesCount);
                         break;
