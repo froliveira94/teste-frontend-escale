@@ -1,17 +1,29 @@
-.parallax-container {
-  height: 400px; }
-
-.user-info {
-  margin-bottom: 40px; }
-  .user-info .user-info_img img {
-    border-radius: 50%; }
-  .user-info .user-info_data li {
-    overflow: hidden; }
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  h3 {
+    font-size: 2.52rem; } }
 
 .caption {
   font-size: 1.25rem;
   font-weight: 300;
   margin-bottom: 30px; }
+
+.parallax-container {
+  height: 400px; }
+
+.user-info {
+  padding-bottom: 40px; }
+  .user-info .user-info_img img {
+    border-radius: 50%; }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .user-info .user-info_data {
+      width: 215px;
+      margin: 15px auto 0 auto; } }
+  .user-info .user-info_data li {
+    overflow: hidden;
+    font-size: 1.25rem;
+    margin-bottom: 5px; }
+    .user-info .user-info_data li span {
+      margin-top: -3px; }
 
 .filter {
   margin-top: 40px; }

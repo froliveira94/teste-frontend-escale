@@ -1,19 +1,25 @@
 .user-info {
-    margin-bottom: 40px;
+    padding-bottom: 40px;
     .user-info_img {
         img {
             border-radius: 50%;
         }
     }
     .user-info_data {
+        @media only screen 
+            and (min-device-width: 320px) 
+            and (max-device-width: 667px)
+            and (-webkit-min-device-pixel-ratio: 2) {
+                width: 215px;
+                margin: 15px auto 0 auto;
+        }
         li {
             overflow: hidden;
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            span {
+                margin-top: -3px;
+            }
         }
     }
-}
-
-.caption {
-    font-size: 1.25rem;
-    font-weight: 300;
-    margin-bottom: 30px;
 }
