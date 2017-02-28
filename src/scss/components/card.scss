@@ -1,0 +1,11 @@
+.card {
+    .card-content {
+        .card_description {
+            @include text-overflow(2, 15px, 1.2);
+            margin-bottom: 10px;
+        }
+        .card_language {
+            margin-bottom: 20px;
+        }
+    }
+}

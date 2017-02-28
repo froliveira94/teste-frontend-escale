@@ -2,148 +2,147 @@
 
 var App = {
 
-    renderUserInfo : function(userUrl) {
-        var url =  "https://api.github.com/users/" + userUrl;
-        var dataUser = $.getJSON( url, function( data ) {
-        }).done(function(data){
-           $('#avatarUser').html("<img src='"+data.avatar_url+"'class='responsive-img'>");
+    renderUserInfo: function (userUrl) {
+        var url = "https://api.github.com/users/" + userUrl;
+        var dataUser = $.getJSON(url, function (data) {
+        }).done(function (data) {
+            $('#avatarUser').html("<img src='" + data.avatar_url + "'class='responsive-img'>");
             $('#userInfoName').html(data.name);
             $('#userInfoData').html("<li>" + "<i class='material-icons left'>perm_identity</i><span class='left'>" + data.login + "</span></li>" + "<li>" + "<i class='material-icons left'>work</i><span class='left'>" + data.company + "</span></li>" + "<li>" + "<i class='material-icons left'>email</i><span class='left'>" + data.email + "</span></li>");
-        }).fail(function() {
+        }).fail(function () {
             console.log('Ocorreu algum erro na API!');
-        })               
-    },
-
-
-    renderUserRepo : function(userUrlRepo, valSelect, objFilter) {
-     var url =  "https://api.github.com/users/" + userUrlRepo; 
-     var valueSelect = valSelect;
-     var dataAlphabeticalOrder = '';
-     var objectFilter = objFilter;
-     
-
-     var dataUserRepo =  $.getJSON( url, function() {})
-        .done(function(data){
-
-            for(var i in data) {
-                if(data[i].language === null) {
-                    data[i].language = 'Linguagem não cadastrada';
-                }
-                if(data[i].description === null) {
-                    data[i].description = 'Descrição não cadastrada';
-                }
-            }
-
-            switch (valueSelect) {
-            case "1":
-                dataAlphabeticalOrder = data.sort(function(a, b) {
-                    var textA = a.name.toUpperCase();
-                    var textB = b.name.toUpperCase();
-                    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-                });
-                App.renderFilter(data, objectFilter, dataAlphabeticalOrder);
-                break;
-            case "2":
-                var dataStarCount = data.sort(function(a, b){
-                    return a.stargazers_count - b.stargazers_count;
-                });
-                App.renderFilter(data, objectFilter, dataStarCount);
-                break;
-            case "3":
-                var dataIssuesCount = data.sort(function(a, b){
-                    return a.open_issues_count - b.open_issues_count;
-                });
-                App.renderFilter(data, objectFilter, dataIssuesCount);
-                break;
-            default:
-                App.renderFilter(data, objectFilter, dataAlphabeticalOrder);
-            }
         })
-        .fail(function() {
-            console.log( "Ocorreu algum erro na API!" );
-        });    
     },
 
-    renderFilter: function(data, objFilter, dataOrder) {
+
+    renderUserRepo: function (userUrlRepo, valSelect, objFilter) {
+        var url = "https://api.github.com/users/" + userUrlRepo;
+        var valueSelect = valSelect;
+        var dataAlphabeticalOrder = '';
+        var objectFilter = objFilter;
+
+
+        var dataUserRepo = $.getJSON(url, function () { })
+            .done(function (data) {
+                for (var i in data) {
+                    if (data[i].language === null) {
+                        data[i].language = 'Linguagem não cadastrada';
+                    }
+                    if (data[i].description === null) {
+                        data[i].description = 'Descrição não cadastrada';
+                    }
+                    data[i].created_at = moment(data[i].created_at).format('DD/MM/YYYY');
+                    data[i].pushed_at = moment(data[i].pushed_at).format('DD/MM/YYYY');
+                }
+
+                switch (valueSelect) {
+                    case "1":
+                        dataAlphabeticalOrder = data.sort(function (a, b) {
+                            var textA = a.name.toUpperCase();
+                            var textB = b.name.toUpperCase();
+                            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                        });
+                        App.renderFilter(data, objectFilter, dataAlphabeticalOrder);
+                        break;
+                    case "2":
+                        var dataStarCount = data.sort(function (a, b) {
+                            return a.stargazers_count - b.stargazers_count;
+                        });
+                        App.renderFilter(data, objectFilter, dataStarCount);
+                        break;
+                    case "3":
+                        var dataIssuesCount = data.sort(function (a, b) {
+                            return a.open_issues_count - b.open_issues_count;
+                        });
+                        App.renderFilter(data, objectFilter, dataIssuesCount);
+                        break;
+                    default:
+                        App.renderFilter(data, objectFilter, dataAlphabeticalOrder);
+                }
+            })
+            .fail(function () {
+                console.log("Ocorreu algum erro na API!");
+            });
+    },
+
+    renderFilter: function (data, objFilter, dataOrder) {
         var currentObjectFilter;
         var elementsFiltered = [];
 
         for (var i in objFilter) {
-                    if(objFilter[i] == "CSS") {
-                      currentObjectFilter = dataOrder.filter(function(el){ 
-                             return el.language === "CSS";
-                       });
-                       currentObjectFilter.forEach(function(el){
-                            elementsFiltered.push(el);
-                       });
-                    }
-                    if(objFilter[i] == "HTML") {
-                       currentObjectFilter = dataOrder.filter(function(el){ 
-                             return el.language === "HTML";
-                       }); 
-                       currentObjectFilter.forEach(function(el){
-                            elementsFiltered.push(el);
-                       });
-                    }
-                    if(objFilter[i] == "JavaScript") {
-                       currentObjectFilter = dataOrder.filter(function(el){ 
-                             return el.language === "JavaScript";
-                       }); 
-                       currentObjectFilter.forEach(function(el){
-                            elementsFiltered.push(el);
-                       });
-                    }
-                } 
-                
-                if(elementsFiltered == ''){
-                    data.forEach(function(el){
-                        elementsFiltered.push(el);
-                    })
-                }  
-
-                App.clearContainer('#userRepos');
-                $.each(elementsFiltered, function (i, value) {
-                   $('#userRepos').append("<div class='col s12 m6'><div class='card blue-grey darken-1'><div class='card-content white-text'><span class='card-title'>"+elementsFiltered[i].name+"</span><p>"+elementsFiltered[i].description+"</p><p>"+elementsFiltered[i].language+"</p><ul class='user-repos_list'><li>"+elementsFiltered[i].stargazers_count+"</li><li>"+elementsFiltered[i].open_issues_count+"</li><li>"+elementsFiltered[i].created_at+"</li><li>"+elementsFiltered[i].pushed_at+"</li></ul></div></div></div>");
+            if (objFilter[i] == "CSS") {
+                currentObjectFilter = dataOrder.filter(function (el) {
+                    return el.language === "CSS";
                 });
+                currentObjectFilter.forEach(function (el) {
+                    elementsFiltered.push(el);
+                });
+            }
+            if (objFilter[i] == "HTML") {
+                currentObjectFilter = dataOrder.filter(function (el) {
+                    return el.language === "HTML";
+                });
+                currentObjectFilter.forEach(function (el) {
+                    elementsFiltered.push(el);
+                });
+            }
+            if (objFilter[i] == "JavaScript") {
+                currentObjectFilter = dataOrder.filter(function (el) {
+                    return el.language === "JavaScript";
+                });
+                currentObjectFilter.forEach(function (el) {
+                    elementsFiltered.push(el);
+                });
+            }
+        }
+
+        if (elementsFiltered == '') {
+            data.forEach(function (el) {
+                elementsFiltered.push(el);
+            })
+        }
+
+        App.clearContainer('#userRepos');
+        $.each(elementsFiltered, function (i, value) {
+            $('#userRepos').append("<div class='col s12 m6'><div class='card blue-grey darken-1'><div class='card-content white-text'><span class='card-title'>" + elementsFiltered[i].name + "</span><p class='card_description'>" + elementsFiltered[i].description + "</p><p class='card_language'>" + elementsFiltered[i].language + "</p><div class='row'><div class='col m6 s6'>" + elementsFiltered[i].stargazers_count + "</div><div class='col m6 s6'>" + elementsFiltered[i].open_issues_count + "</div><div class='col m6 s6'>" + elementsFiltered[i].created_at + "</div><div class='col m6 s6'>" + elementsFiltered[i].pushed_at + "</div></div></div><div class='card-action'><a href='" + elementsFiltered[i].html_url + "' target='_blank'>Ver mais</a></div></div></div>");
+        });
 
     },
 
-    clearContainer : function(element) {
+    clearContainer: function (element) {
         $(element).html('');
     },
 
-    parallax : function(){
-         $('.parallax').parallax();
+    parallax: function () {
+        $('.parallax').parallax();
     }
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     var valueSelect;
     var obj = {};
-    //var bkp;
 
-     App.parallax();
-     $('select').material_select();
+    App.parallax();
+    $('select').material_select();
 
-     App.renderUserInfo('wilfernandesjr');
-     App.renderUserRepo('wilfernandesjr/starred', '1', obj);   
-     
-     $('#selectOrder').change(function(){
-        $( "#selectOrder option:selected" ).each(function() {
+    App.renderUserInfo('wilfernandesjr');
+    App.renderUserRepo('wilfernandesjr/starred', '1', obj);
+
+    $('#selectOrder').change(function () {
+        $('#selectFilterLanguage').prop('selectedIndex', 0);
+        $('select').material_select();
+        $("#selectOrder option:selected").each(function () {
             valueSelect = this.value;
             App.renderUserRepo('wilfernandesjr/starred', this.value, obj);
         });
-     }).trigger('change');
+    }).trigger('change');
 
-     $('#selectFilterLanguage').change(function(){
-        $( "#selectFilterLanguage option:selected" ).each(function(key, val) {
+    $('#selectFilterLanguage').change(function () {
+        $("#selectFilterLanguage option:selected").each(function (key, val) {
             obj[key] = this.value;
         });
 
         App.renderUserRepo('wilfernandesjr/starred', valueSelect, obj);
-        //bkp = obj;
         obj = {}
-     });
-
+    });
 });
-        
