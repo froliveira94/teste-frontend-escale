@@ -1,5 +1,17 @@
 .card {
+    @media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) { 
+        font-size: .9rem;
+    }
     .card-content {
+        @media only screen 
+        and (min-device-width: 320px) 
+        and (max-device-width: 667px) 
+        and (-webkit-min-device-pixel-ratio: 2) { 
+            padding: 24px 24px 12px 24px;
+        }
         .card-title {
             @include text-overflow(1, 24px, 1.2);
             margin-bottom: 25px;
